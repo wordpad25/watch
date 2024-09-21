@@ -16,11 +16,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set Xcode Version
-        uses: maxim-lobanov/setup-xcode@v2
-        with:
-          xcode-version: '14.0'  # Adjust this version based on your needs
-
       - name: Build the project
         run: |
           xcodebuild -project "watch/Complete/CreatingAwatchOSApp.xcodeproj" \
