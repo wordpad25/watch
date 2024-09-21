@@ -18,7 +18,7 @@ jobs:
 
       - name: Build the project
         run: |
-          xcodebuild -project "watch/Complete/CreatingAwatchOSApp.xcodeproj" \
+          xcodebuild -project "Complete/CreatingAwatchOSApp.xcodeproj" \
           -scheme "CreatingAwatchOSApp" \
           -sdk iphoneos \
           -configuration Release \
@@ -26,7 +26,7 @@ jobs:
 
       - name: Archive the app
         run: |
-          xcodebuild -project "watch/Complete/CreatingAwatchOSApp.xcodeproj" \
+          xcodebuild -project "Complete/CreatingAwatchOSApp.xcodeproj" \
           -scheme "CreatingAwatchOSApp" \
           -sdk iphoneos \
           -configuration Release \
