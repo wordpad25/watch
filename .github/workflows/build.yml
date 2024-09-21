@@ -16,11 +16,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
-          sudo gem install cocoapods # If you are using CocoaPods
-          pod install # Install pods if necessary
-
       - name: Build the project
         run: |
           xcodebuild -workspace "YourProject.xcworkspace" \
