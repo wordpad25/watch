@@ -9,6 +9,6 @@
     <key>stripSwiftSymbols</key>
     <true/>
     <key>teamID</key>
-    <string>YOUR_TEAM_ID</string>  <!-- Replace with your Apple Developer Team ID -->
+    <string>7GMRTDP69Q</string>  <!-- Replace with your Apple Developer Team ID -->
 </dict>
 </plist>
