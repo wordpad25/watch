@@ -19,7 +19,7 @@ jobs:
       - name: Build the project
         run: |
           xcodebuild -project "Complete/CreatingAwatchOSApp.xcodeproj" \
-          -scheme "CreatingAwatchOSApp" \
+          -scheme "WatchLandmarks Watch App" \
           -sdk iphoneos \
           -configuration Release \
           clean build
