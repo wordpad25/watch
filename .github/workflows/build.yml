@@ -1,4 +1,4 @@
-name: Build iOS Project
+name: Build watchOS App
 
 on:
   push:
@@ -16,18 +16,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set Xcode Version
+        uses: maxim-lobanov/setup-xcode@v2
+        with:
+          xcode-version: '14.0'  # Adjust this version based on your needs
+
       - name: Build the project
         run: |
-          xcodebuild -workspace "YourProject.xcworkspace" \
-          -scheme "YourSchemeName" \
+          xcodebuild -project "watch/Complete/CreatingAwatchOSApp.xcodeproj" \
+          -scheme "CreatingAwatchOSApp" \  # Make sure to use the correct scheme
           -sdk iphoneos \
           -configuration Release \
           clean build
 
       - name: Archive the app
         run: |
-          xcodebuild -workspace "YourProject.xcworkspace" \
-          -scheme "YourSchemeName" \
+          xcodebuild -project "watch/Complete/CreatingAwatchOSApp.xcodeproj" \
+          -scheme "CreatingAwatchOSApp" \
           -sdk iphoneos \
           -configuration Release \
           -archivePath $PWD/build/YourApp.xcarchive \
@@ -39,10 +44,9 @@ jobs:
           -archivePath $PWD/build/YourApp.xcarchive \
           -exportPath $PWD/build \
           -exportOptionsPlist "ExportOptions.plist"
-      
+
       - name: Upload IPA as Artifact
         uses: actions/upload-artifact@v3
         with:
           name: YourApp
           path: build/YourApp.ipa
-
