@@ -25,7 +25,12 @@ jobs:
           security list-keychains
           security show-keychain-info ~/Library/Keychains/build.keychain
           security unlock-keychain -p "" ~/Library/Keychains/build.keychain
-          
+
+      - name: Check certificate details
+        run: |
+          echo "${{ secrets.APPLE_CERTIFICATE }}" | base64 --decode > apple_cert.p12
+          ls -l apple_cert.p12
+          hexdump -C apple_cert.p12 | head -n 10          
 
       - name: Install provisioning profile
         run: |
