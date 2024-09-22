@@ -45,17 +45,19 @@ jobs:
           mv watch_profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 
 
-      # Build the watchOS app for physical device
       - name: Build the watchOS app for device
         run: |
-          xcodebuild -project "Complete/CreatingAwatchOSApp.xcodeproj" \
+          xcodebuild -verbose \
+          -project "Complete/CreatingAwatchOSApp.xcodeproj" \
           -scheme "WatchLandmarks Watch App" \
           -sdk watchos \
           -destination 'generic/platform=watchOS' \
           -configuration Release \
           -allowProvisioningUpdates \
+          -allowProvisioningDeviceRegistration \
           DEVELOPMENT_TEAM=${{ secrets.APPLE_DEVELOPMENT_TEAM }} \
           clean build
+
 
       - name: Archive the app
         run: |
