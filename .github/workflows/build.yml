@@ -37,7 +37,7 @@ jobs:
           echo "${{ secrets.APPLE_PROVISIONING_PROFILE }}" | base64 --decode > profile.mobileprovision
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           mv profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
-
+  
       - name: Build the watchOS app
         run: |
           xcodebuild -project "Complete/CreatingAwatchOSApp.xcodeproj" \
@@ -46,8 +46,9 @@ jobs:
           -destination 'platform=watchOS Simulator,name=Apple Watch Series 6 - 40mm' \
           -configuration Release \
           -allowProvisioningUpdates \
-          DEVELOPMENT_TEAM=7GMRTDP69Q \
+          DEVELOPMENT_TEAM=${{ secrets.APPLE_DEVELOPMENT_TEAM }} \
           clean build
+
 
 
       - name: Archive the app
