@@ -37,19 +37,18 @@ jobs:
           echo "${{ secrets.APPLE_PROVISIONING_PROFILE }}" | base64 --decode > profile.mobileprovision
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           mv profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
-  
-      - name: Build the watchOS app
+
+      # Build the watchOS app for physical device
+      - name: Build the watchOS app for device
         run: |
           xcodebuild -project "Complete/CreatingAwatchOSApp.xcodeproj" \
           -scheme "WatchLandmarks Watch App" \
-          -sdk watchsimulator \
-          -destination 'platform=watchOS Simulator,name=Apple Watch Series 6 - 40mm' \
+          -sdk watchos \
+          -destination 'generic/platform=watchOS' \
           -configuration Release \
           -allowProvisioningUpdates \
           DEVELOPMENT_TEAM=${{ secrets.APPLE_DEVELOPMENT_TEAM }} \
           clean build
-
-
 
       - name: Archive the app
         run: |
@@ -65,12 +64,10 @@ jobs:
           xcodebuild -exportArchive \
           -archivePath $PWD/build/WatchLandmarks.xcarchive \
           -exportPath $PWD/build \
-          -exportOptionsPlist "Complete/CreatingAwatchOSApp.xcodeproj/ExportOptions.plist"
+          -exportOptionsPlist "Complete/CreatingAwatchOSApp/ExportOptions.plist"
 
       - name: Upload IPA as Artifact
         uses: actions/upload-artifact@v3
         with:
           name: WatchLandmarks
           path: build/WatchLandmarks.ipa
-
-          
