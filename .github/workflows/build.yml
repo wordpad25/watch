@@ -29,7 +29,7 @@ jobs:
       - name: Create temporary keychain
         run: |
           security create-keychain -p "" /tmp/temp.keychain
-          security import apple_cert.p12 -k /tmp/temp.keychain -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign
+          security import apple_cert.p12 -k ~/Library/Keychains/build.keychain -P "robosir25" -T /usr/bin/codesign
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" /tmp/temp.keychain
           security unlock-keychain -p "" /tmp/temp.keychain
 
