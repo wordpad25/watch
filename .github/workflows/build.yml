@@ -50,9 +50,11 @@ jobs:
           -configuration Release \
           -allowProvisioningUpdates \
           -allowProvisioningDeviceRegistration \
+          DEVELOPMENT_TEAM=${{ secrets.APPLE_DEVELOPMENT_TEAM }} \
           -authenticationKeyID "${{ secrets.APPLE_ID_KEY_ID }}" \
           -authenticationKeyIssuerID "${{ secrets.APPLE_ID_ISSUER_ID }}" \
           clean build
+
 
       - name: Archive the app
         run: |
