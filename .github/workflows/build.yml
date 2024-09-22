@@ -32,11 +32,18 @@ jobs:
           ls -l apple_cert.p12
           hexdump -C apple_cert.p12 | head -n 10          
 
-      - name: Install provisioning profile
+      - name: Install provisioning profile for main app
         run: |
-          echo "${{ secrets.APPLE_PROVISIONING_PROFILE }}" | base64 --decode > profile.mobileprovision
+          echo "${{ secrets.APPLE_PROVISIONING_PROFILE }}" | base64 --decode > main_profile.mobileprovision
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          mv profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+          mv main_profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+
+      - name: Install provisioning profile for watch app
+        run: |
+          echo "${{ secrets.APPLE_WATCH_PROVISIONING_PROFILE }}" | base64 --decode > watch_profile.mobileprovision
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          mv watch_profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+
 
       # Build the watchOS app for physical device
       - name: Build the watchOS app for device
