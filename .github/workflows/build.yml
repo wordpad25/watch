@@ -26,13 +26,6 @@ jobs:
           security show-keychain-info ~/Library/Keychains/build.keychain
           security unlock-keychain -p "" ~/Library/Keychains/build.keychain
 
-      - name: Create temporary keychain
-        run: |
-          security create-keychain -p "" /tmp/temp.keychain
-          security import apple_cert.p12 -k ~/Library/Keychains/build.keychain -P "robosir25" -T /usr/bin/codesign
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" /tmp/temp.keychain
-          security unlock-keychain -p "" /tmp/temp.keychain
-
       - name: Check certificate details
         run: |
           echo "${{ secrets.APPLE_CERTIFICATE }}" | base64 --decode > apple_cert.p12
