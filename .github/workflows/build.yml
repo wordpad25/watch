@@ -22,7 +22,10 @@ jobs:
           security create-keychain -p "" build.keychain
           security import apple_cert.p12 -k ~/Library/Keychains/build.keychain -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" ~/Library/Keychains/build.keychain
+          security list-keychains
+          security show-keychain-info ~/Library/Keychains/build.keychain
           security unlock-keychain -p "" ~/Library/Keychains/build.keychain
+          
 
       - name: Install provisioning profile
         run: |
